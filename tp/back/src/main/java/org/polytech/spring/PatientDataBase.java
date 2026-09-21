@@ -1,7 +1,9 @@
 package org.polytech.spring;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class PatientDataBase implements PatientStore{
 
     @Override
