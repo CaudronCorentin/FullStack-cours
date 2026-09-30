@@ -27,4 +27,8 @@ public class FilmService {
         }
         return film;
     }
+    public Film createFilm(Film film) {
+        return filmRepository.save(film);
+    }
+
 }

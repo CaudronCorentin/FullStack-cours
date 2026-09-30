@@ -10,6 +10,7 @@ import java.util.List;
 public class FilmRepository {
 
     private final List<Film> films = new ArrayList<>();
+    private long id_prochain = 0;
 
     public List<Film> findAll() {
         return films;
@@ -22,5 +23,11 @@ public class FilmRepository {
             }
         }
         return null;
+    }
+
+    public Film save(Film film) {
+        film.setId(++id_prochain);
+        films.add(film);
+        return film;
     }
 }

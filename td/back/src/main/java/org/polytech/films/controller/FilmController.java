@@ -2,11 +2,11 @@ package org.polytech.films.controller;
 
 import org.polytech.films.model.Film;
 import org.polytech.films.service.FilmService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -27,5 +27,15 @@ public class FilmController {
     @GetMapping("/{id}")
     public Film getFilm(@PathVariable Long id) {
         return filmService.getFilm(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Film> createFilm(@RequestBody Film film) {
+        Film film_cree = filmService.createFilm(film);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(film_cree.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(film_cree);
     }
 }
