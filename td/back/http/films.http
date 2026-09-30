@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Mise à jour
-PUT http://localhost:8080/films/3
+PUT http://localhost:8080/films/1
 Content-Type: application/json
 
 {

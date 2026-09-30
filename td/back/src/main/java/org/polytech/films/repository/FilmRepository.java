@@ -30,4 +30,8 @@ public class FilmRepository {
         films.add(film);
         return film;
     }
+
+    public void delete(Film film) {
+        films.remove(film);
+    }
 }

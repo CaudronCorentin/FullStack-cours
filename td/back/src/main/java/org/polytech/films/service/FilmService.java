@@ -32,12 +32,17 @@ public class FilmService {
     }
 
     public Film updateFilm(Long id, Film film) {
-        Film film_actuel = getFilm(id); 
+        Film film_actuel = getFilm(id);
         film_actuel.setTitre(film.getTitre());
         film_actuel.setRealisateur(film.getRealisateur());
         film_actuel.setDateSortie(film.getDateSortie());
         film_actuel.setGenre(film.getGenre());
         return film_actuel;
+    }
+
+    public void deleteFilm(Long id) {
+        Film film = getFilm(id);
+        filmRepository.delete(film);
     }
 
 }
