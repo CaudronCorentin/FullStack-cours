@@ -31,4 +31,13 @@ public class FilmService {
         return filmRepository.save(film);
     }
 
+    public Film updateFilm(Long id, Film film) {
+        Film film_actuel = getFilm(id); 
+        film_actuel.setTitre(film.getTitre());
+        film_actuel.setRealisateur(film.getRealisateur());
+        film_actuel.setDateSortie(film.getDateSortie());
+        film_actuel.setGenre(film.getGenre());
+        return film_actuel;
+    }
+
 }

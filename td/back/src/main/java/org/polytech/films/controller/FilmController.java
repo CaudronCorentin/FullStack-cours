@@ -38,4 +38,9 @@ public class FilmController {
                 .toUri();
         return ResponseEntity.created(location).body(film_cree);
     }
+
+    @PutMapping("/{id}")
+    public Film updateFilm(@PathVariable Long id, @RequestBody Film film) {
+        return filmService.updateFilm(id, film);
+    }
 }
