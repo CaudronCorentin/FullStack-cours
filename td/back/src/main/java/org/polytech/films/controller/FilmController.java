@@ -3,6 +3,7 @@ package org.polytech.films.controller;
 import org.polytech.films.model.Film;
 import org.polytech.films.service.FilmService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class FilmController {
     @GetMapping
     public List<Film> getFilms() {
         return filmService.getFilms();
+    }
+
+    @GetMapping("/{id}")
+    public Film getFilm(@PathVariable Long id) {
+        return filmService.getFilm(id);
     }
 }

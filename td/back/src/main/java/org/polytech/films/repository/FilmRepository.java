@@ -14,4 +14,13 @@ public class FilmRepository {
     public List<Film> findAll() {
         return films;
     }
+
+    public Film findById(Long id) {
+        for (Film film : films) {
+            if (film.getId().equals(id)) {
+                return film;
+            }
+        }
+        return null;
+    }
 }
