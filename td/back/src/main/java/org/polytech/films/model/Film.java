@@ -1,13 +1,23 @@
 package org.polytech.films.model;
 
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
 public class Film {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 200)
     private String titre;
+
     private String realisateur;
     private LocalDate dateSortie;
+
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     public Film() {}

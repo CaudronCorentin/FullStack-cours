@@ -21,10 +21,7 @@ public class FilmService {
     }
 
     public Film getFilm(Long id) {
-        Film film = filmRepository.findById(id);
-        if (film == null) {
-            throw new FilmNotFoundException(id);
-        }
+        Film film = filmRepository.findById(id).orElseThrow(() -> new FilmNotFoundException(id));
         return film;
     }
     public Film createFilm(Film film) {
@@ -37,7 +34,7 @@ public class FilmService {
         film_actuel.setRealisateur(film.getRealisateur());
         film_actuel.setDateSortie(film.getDateSortie());
         film_actuel.setGenre(film.getGenre());
-        return film_actuel;
+        return filmRepository.save(film_actuel);
     }
 
     public void deleteFilm(Long id) {
