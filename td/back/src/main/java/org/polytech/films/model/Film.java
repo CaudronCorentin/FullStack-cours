@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,7 +25,7 @@ public class Film {
 
     @ManyToMany
     @JoinTable(name="film_acteur", joinColumns = @JoinColumn(name="id_film"),inverseJoinColumns = @JoinColumn(name="id_acteur"))
-    private Set<Acteur> acteurs;
+    private Set<Acteur> acteurs = new HashSet<>();
 
     public Film() {}
 

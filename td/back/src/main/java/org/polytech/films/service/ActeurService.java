@@ -1,6 +1,6 @@
 package org.polytech.films.service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.polytech.films.DTO.ActeurCreationDto;
 import org.polytech.films.DTO.ActeurDto;
 import org.polytech.films.exception.ActeurNotFoundException;

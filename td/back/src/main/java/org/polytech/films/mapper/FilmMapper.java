@@ -1,6 +1,7 @@
 package org.polytech.films.mapper;
 
 import org.polytech.films.DTO.FilmCreationDto;
+import org.polytech.films.DTO.FilmDetailDto;
 import org.polytech.films.DTO.FilmDto;
 import org.polytech.films.model.Film;
 
@@ -18,6 +19,12 @@ public class FilmMapper {
         f.setDateSortie(d.dateSortie());
         f.setGenre(d.genre());
         return f;
+    }
+
+    public static FilmDetailDto toDetailDto(Film f) {
+        return new FilmDetailDto(f.getId(), f.getTitre(), f.getRealisateur(),
+                f.getDateSortie(), f.getGenre(),
+                f.getActeurs().stream().map(ActeurMapper::toDto).toList());
     }
 
 }

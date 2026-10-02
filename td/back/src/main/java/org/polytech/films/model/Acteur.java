@@ -2,6 +2,7 @@ package org.polytech.films.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,7 @@ public class Acteur {
     private String prenom;
 
     @ManyToMany(mappedBy = "acteurs")
-    private Set<Film> films;
+    private Set<Film> films = new HashSet<>();
 
     public Acteur() {}
 
