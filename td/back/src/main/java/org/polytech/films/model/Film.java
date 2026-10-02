@@ -4,6 +4,7 @@ package org.polytech.films.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -73,5 +74,13 @@ public class Film {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public Set<Acteur> getActeurs() {
+        return acteurs;
+    }
+
+    public void setActeurs(Set<Acteur> acteurs) {
+        this.acteurs = acteurs;
     }
 }

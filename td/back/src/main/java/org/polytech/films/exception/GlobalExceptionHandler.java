@@ -12,4 +12,9 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleFilmNotFound(FilmNotFoundException e) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
     }
+
+    @ExceptionHandler(ActeurNotFoundException.class)
+    public ProblemDetail handleActeurNotFound(ActeurNotFoundException e) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+    }
 }
