@@ -1,6 +1,7 @@
 package org.polytech.films.controller;
 
 import org.polytech.films.DTO.FilmCreationDto;
+import org.polytech.films.DTO.FilmDetailDto;
 import org.polytech.films.DTO.FilmDto;
 import org.polytech.films.service.FilmService;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public FilmDto getFilm(@PathVariable Long id) {
+    public FilmDetailDto getFilm(@PathVariable Long id) {
         return filmService.getFilm(id);
     }
 
