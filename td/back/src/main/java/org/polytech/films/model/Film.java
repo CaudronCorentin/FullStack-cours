@@ -4,6 +4,7 @@ package org.polytech.films.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Film {
@@ -19,6 +20,10 @@ public class Film {
 
     @Enumerated(EnumType.STRING)
     private Genre genre;
+
+    @ManyToMany
+    @JoinTable(name="film_acteur", joinColumns = @JoinColumn(name="id_film"),inverseJoinColumns = @JoinColumn(name="id_acteur"))
+    private Set<Acteur> acteurs;
 
     public Film() {}
 
