@@ -1,0 +1,58 @@
+### Liste des acteurs sans films
+GET http://localhost:8080/acteurs
+Accept: application/json
+
+### Création, réponse attendue : 201 Created avec en-tête Location
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "nom": "Ford",
+  "prenom": "Harrison"
+}
+
+### Acteur identifié par son ID
+GET http://localhost:8080/acteurs/1
+Accept: application/json
+
+### Mise à jour
+PUT http://localhost:8080/acteurs/1
+Content-Type: application/json
+
+{
+  "nom": "Ford",
+  "prenom": "Harrison J."
+}
+
+### Création d'un film à associer à l'acteur d'id 1, réponse attendue : 201 Created
+POST http://localhost:8080/films
+Content-Type: application/json
+
+{
+  "titre": "Blade Runner",
+  "realisateur": "Ridley Scott",
+  "dateSortie": "1982-06-25",
+  "genre": "SCIENCE_FICTION"
+}
+
+### Association du film 1 à l'acteur 1
+POST http://localhost:8080/films/1/acteurs/1
+
+### Films de l'acteur 1
+GET http://localhost:8080/acteurs/1/films
+Accept: application/json
+
+### Suppression d'un acteur encore associé à un film. Réponse attendue : 204 No Content
+DELETE http://localhost:8080/acteurs/1
+
+### Le film 1 n'a plus d'acteurs. Réponse attendue : liste vide
+GET http://localhost:8080/films/1/acteurs
+Accept: application/json
+
+### Identifiant inconnu. Réponse attendue : 404 au format ProblemDetail
+GET http://localhost:8080/acteurs/9999
+Accept: application/json
+
+### Films d'un acteur inconnu,nréponse attendue : 404 au format ProblemDetail
+GET http://localhost:8080/acteurs/9999/films
+Accept: application/json

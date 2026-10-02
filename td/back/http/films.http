@@ -2,10 +2,6 @@
 GET http://localhost:8080/films
 Accept: application/json
 
-### Film identifié par son identifiant
-GET http://localhost:8080/films/1
-Accept: application/json
-
 ### Création — réponse attendue : 201 Created avec en-tête Location
 POST http://localhost:8080/films
 Content-Type: application/json
@@ -16,6 +12,10 @@ Content-Type: application/json
   "dateSortie": "1982-06-25",
   "genre": "SCIENCE_FICTION"
 }
+
+### Film identifié par son id
+GET http://localhost:8080/films/1
+Accept: application/json
 
 ### Création invalide — réponse attendue : 400 au format ProblemDetail
 POST http://localhost:8080/films
@@ -35,6 +35,36 @@ Content-Type: application/json
   "dateSortie": "1982-06-25",
   "genre": "SCIENCE_FICTION"
 }
+
+### Création d'un acteur à associer au film d'id 1. Réponse attendue : 201 Created
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "nom": "Ford",
+  "prenom": "Harrison"
+}
+
+### Association de l'acteur 1 au film d'id 1, réponse attendue : 200 avec le FilmDetailDto
+POST http://localhost:8080/films/1/acteurs/1
+
+### Détail du film avec ses acteurs avec FilmDetailDto
+GET http://localhost:8080/films/1
+Accept: application/json
+
+### Acteurs du film 1
+GET http://localhost:8080/films/1/acteurs
+Accept: application/json
+
+### Association avec un acteur inconnu. Réponse attendue : 404 au format ProblemDetail
+POST http://localhost:8080/films/1/acteurs/9999
+
+### Dissociation de l'acteur 1 du film 1. Réponse attendue : 204 No Content
+DELETE http://localhost:8080/films/1/acteurs/1
+
+### Acteurs du film 1 après dissociation. Réponse attendue : liste vide
+GET http://localhost:8080/films/1/acteurs
+Accept: application/json
 
 ### Suppression — réponse attendue : 204 No Content
 DELETE http://localhost:8080/films/1
