@@ -1,6 +1,7 @@
 package org.polytech.films.controller;
 
-import org.polytech.films.model.Film;
+import org.polytech.films.DTO.FilmCreationDto;
+import org.polytech.films.DTO.FilmDto;
 import org.polytech.films.service.FilmService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,28 +21,27 @@ public class FilmController {
     }
 
     @GetMapping
-    public List<Film> getFilms() {
+    public List<FilmDto> getFilms() {
         return filmService.getFilms();
     }
 
     @GetMapping("/{id}")
-    public Film getFilm(@PathVariable Long id) {
+    public FilmDto getFilm(@PathVariable Long id) {
         return filmService.getFilm(id);
     }
 
     @PostMapping
-    public ResponseEntity<Film> createFilm(@RequestBody Film film) {
-        Film film_cree = filmService.createFilm(film);
+    public ResponseEntity<FilmDto> createFilm(@RequestBody FilmCreationDto filmCreationDto) {
+        FilmDto film_cree = filmService.createFilm(filmCreationDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(film_cree.getId())
+                .buildAndExpand(film_cree.id())
                 .toUri();
         return ResponseEntity.created(location).body(film_cree);
     }
-
     @PutMapping("/{id}")
-    public Film updateFilm(@PathVariable Long id, @RequestBody Film film) {
-        return filmService.updateFilm(id, film);
+    public FilmDto updateFilm(@PathVariable Long id,@RequestBody FilmCreationDto filmCreationDto) {
+        return filmService.updateFilm(id, filmCreationDto);
     }
 
     @DeleteMapping("/{id}")
