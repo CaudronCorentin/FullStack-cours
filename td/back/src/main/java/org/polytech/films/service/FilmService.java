@@ -1,10 +1,14 @@
 package org.polytech.films.service;
 
+import org.polytech.films.DTO.ActeurDto;
 import org.polytech.films.DTO.FilmCreationDto;
 import org.polytech.films.DTO.FilmDetailDto;
 import org.polytech.films.DTO.FilmDto;
+import org.polytech.films.exception.ActeurNotFoundException;
 import org.polytech.films.exception.FilmNotFoundException;
+import org.polytech.films.mapper.ActeurMapper;
 import org.polytech.films.mapper.FilmMapper;
+import org.polytech.films.model.Acteur;
 import org.polytech.films.model.Film;
 import org.polytech.films.repository.ActeurRepository;
 import org.polytech.films.repository.FilmRepository;
@@ -53,6 +57,31 @@ public class FilmService {
 
     private Film trouverFilm(Long id) {
         return filmRepository.findById(id).orElseThrow(() -> new FilmNotFoundException(id));
+    }
+
+    @Transactional(readOnly = true)
+    public List<ActeurDto> getActeursDuFilm(Long id) {
+        trouverFilm(id);   // 404 si le film n'existe pas
+        return acteurRepository.findActeursDuFilm(id).stream().map(ActeurMapper::toDto).toList();
+    }
+
+    @Transactional
+    public FilmDetailDto ajouterActeur(Long filmId, Long acteurId) {
+        Film film = trouverFilm(filmId);
+        Acteur acteur = acteurRepository.findById(acteurId)
+                .orElseThrow(() -> new ActeurNotFoundException(acteurId));
+        film.getActeurs().add(acteur);
+        acteur.getFilms().add(film);
+        return FilmMapper.toDetailDto(film);
+    }
+
+    @Transactional
+    public void retirerActeur(Long filmId, Long acteurId) {
+        Film film = trouverFilm(filmId);
+        Acteur acteur = acteurRepository.findById(acteurId)
+                .orElseThrow(() -> new ActeurNotFoundException(acteurId));
+        film.getActeurs().remove(acteur);
+        acteur.getFilms().remove(film);
     }
 
 }

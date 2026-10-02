@@ -1,5 +1,6 @@
 package org.polytech.films.controller;
 
+import org.polytech.films.DTO.ActeurDto;
 import org.polytech.films.DTO.FilmCreationDto;
 import org.polytech.films.DTO.FilmDetailDto;
 import org.polytech.films.DTO.FilmDto;
@@ -48,6 +49,22 @@ public class FilmController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFilm(@PathVariable Long id) {
         filmService.deleteFilm(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/acteurs")
+    public List<ActeurDto> getActeursDuFilm(@PathVariable Long id) {
+        return filmService.getActeursDuFilm(id);
+    }
+
+    @PostMapping("/{id}/acteurs/{acteurId}")
+    public FilmDetailDto ajouterActeur(@PathVariable Long id, @PathVariable Long acteurId) {
+        return filmService.ajouterActeur(id, acteurId);
+    }
+
+    @DeleteMapping("/{id}/acteurs/{acteurId}")
+    public ResponseEntity<Void> retirerActeur(@PathVariable Long id, @PathVariable Long acteurId) {
+        filmService.retirerActeur(id, acteurId);
         return ResponseEntity.noContent().build();
     }
 }

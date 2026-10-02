@@ -1,5 +1,8 @@
 package org.polytech.films.service;
 
+import org.polytech.films.DTO.FilmDto;
+import org.polytech.films.mapper.FilmMapper;
+import org.polytech.films.repository.FilmRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.polytech.films.DTO.ActeurCreationDto;
 import org.polytech.films.DTO.ActeurDto;
@@ -17,9 +20,11 @@ public class ActeurService {
 
 
     private final ActeurRepository acteurRepository;
+    private final FilmRepository filmRepository;
 
-    public ActeurService(ActeurRepository acteurRepository) {
+    public ActeurService(ActeurRepository acteurRepository, FilmRepository filmRepository) {
         this.acteurRepository = acteurRepository;
+        this.filmRepository = filmRepository;
     }
 
     public List<ActeurDto> getActeurs() {
@@ -53,6 +58,12 @@ public class ActeurService {
 
     private Acteur trouverActeur(Long id) {
         return acteurRepository.findById(id).orElseThrow(() -> new ActeurNotFoundException(id));
+    }
+
+    @Transactional(readOnly = true)
+    public List<FilmDto> getFilmsDeActeur(Long id) {
+        trouverActeur(id);
+        return filmRepository.findFilmsDeActeur(id).stream().map(FilmMapper::toDto).toList();
     }
 
 }

@@ -2,6 +2,7 @@ package org.polytech.films.controller;
 
 import org.polytech.films.DTO.ActeurCreationDto;
 import org.polytech.films.DTO.ActeurDto;
+import org.polytech.films.DTO.FilmDto;
 import org.polytech.films.service.ActeurService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,10 @@ public class ActeurController {
     public ResponseEntity<Void> deleteActeur(@PathVariable Long id) {
         acteurService.deleteActeur(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/films")
+    public List<FilmDto> getFilmsDeActeur(@PathVariable Long id) {
+        return acteurService.getFilmsDeActeur(id);
     }
 }
