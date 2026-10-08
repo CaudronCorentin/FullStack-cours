@@ -1,0 +1,5 @@
+<li [style.color]="estAncien(film()) ? 'gray' : 'black'">
+  <a [routerLink]="['/films', film().id]">{{ film().titre }}</a>
+  <span>{{ film().dateSortie | date:"dd/MM/yyyy" }}</span>
+  <button (click)="onSupprimer()">Supprimer</button>
+</li>
