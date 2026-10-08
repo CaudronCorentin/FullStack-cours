@@ -1,4 +1,4 @@
-<li [style.color]="estAncien(film()) ? 'gray' : 'black'">
+<li [ngClass]="{ ancien: estAncien(film()) }">
   <a [routerLink]="['/films', film().id]">{{ film().titre }}</a>
   <span>{{ film().dateSortie | date:"dd/MM/yyyy" }}</span>
   <button (click)="onSupprimer()">Supprimer</button>

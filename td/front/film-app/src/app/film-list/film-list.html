@@ -5,11 +5,21 @@
 }
 
 @if (films$() | async; as films) {
+  <h2>Films récents</h2>
   <ul>
-    @for (f of films; track f.id) {
+    @for (f of recents(films); track f.id) {
       <app-film-card [film]="f" (supprimer)="onSupprimer($event)" />
     } @empty {
-      <li>Aucun film enregistré</li>
+      <li>Aucun film récent</li>
+    }
+  </ul>
+
+  <h2>Films anciens</h2>
+  <ul>
+    @for (f of anciens(films); track f.id) {
+      <app-film-card [film]="f" (supprimer)="onSupprimer($event)" />
+    } @empty {
+      <li>Aucun film ancien</li>
     }
   </ul>
 }

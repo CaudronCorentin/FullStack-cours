@@ -22,4 +22,18 @@ export class FilmList {
       error: () => this.erreur.set('Suppression impossible'),
     });
   }
+
+  estAncien(f: Film) {
+    return new Date(f.dateSortie).getFullYear() < 2000;
+  }
+
+  recents(films: Film[]) {
+    return films.filter((f) => !this.estAncien(f));
+  }
+
+  anciens(films: Film[]) {
+    return films.filter((f) => this.estAncien(f));
+  }
 }
+
+
