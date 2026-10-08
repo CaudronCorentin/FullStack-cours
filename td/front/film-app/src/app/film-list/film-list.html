@@ -1,12 +1,13 @@
 <a routerLink="/films/nouveau">Nouveau film</a>
 
-@if (films$ | async; as films) {
+@if (erreur()) {
+  <p>{{ erreur() }}</p>
+}
+
+@if (films$() | async; as films) {
   <ul>
     @for (f of films; track f.id) {
-      <li [style.color]="estAncien(f) ? 'gray' : 'black'">
-        <a [routerLink]="['/films', f.id]">{{ f.titre }}</a>
-        <span>{{ f.dateSortie | date:"dd/MM/yyyy" }}</span>
-      </li>
+      <app-film-card [film]="f" (supprimer)="onSupprimer($event)" />
     } @empty {
       <li>Aucun film enregistré</li>
     }
