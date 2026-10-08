@@ -1,0 +1,28 @@
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, of } from 'rxjs';
+import { Acteur } from '../model/acteur.model';
+import { Film } from '../model/film.model';
+
+@Injectable({ providedIn: 'root' })
+export class ActeurService {
+  private http = inject(HttpClient);
+  private url = '/api/acteurs';
+
+  getAll(): Observable<Acteur[]> {
+    return this.http.get<Acteur[]>(this.url).pipe(
+      catchError((e: HttpErrorResponse) => {
+        console.error(e.status, e.error?.detail);
+        return of([]);
+      }),
+    );
+  }
+
+  getById(id: number): Observable<Acteur> {
+    return this.http.get<Acteur>(`${this.url}/${id}`);
+  }
+
+  getFilms(id: number): Observable<Film[]> {
+    return this.http.get<Film[]>(`${this.url}/${id}/films`);
+  }
+}
