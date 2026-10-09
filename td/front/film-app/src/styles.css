@@ -2,43 +2,122 @@
 body {
   font-family: sans-serif;
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  margin: 0 auto;
+  padding: 1rem;
   line-height: 1.5;
+  background: #f4f4f4;
+  color: #222;
 }
 
+
+
+/* menu */
 nav {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
 }
 
 .actif {
   font-weight: bold;
+  color: #4f46e5;
+}
+
+
+
+/* links */
+a {
+  color: #4f46e5;
+}
+
+
+
+/* lists */
+ul {
+  list-style: none;
+  padding: 0;
 }
 
 li {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 0.7rem 1rem;
   margin-bottom: 0.5rem;
+  transition: transform 0.2s;
 }
 
-button {
-  margin-left: 0.5rem;
+li:hover {
+  transform: scale(1.02);
 }
 
+li span {
+  margin-left: 1rem;
+  color: #777;
+}
+
+
+
+/* les films avant 2000*/
 .ancien,
 .ancien a {
   color: #08771d;
 }
 
-li span {
-  margin-left: 1rem;
+
+
+/* buttons */
+button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  background: #3c3a3a;
+  color: #c6c4c4;
+  transform: scale(1.02);
 }
 
-:root {
-  color-scheme: light dark;
+
+
+/* formulaire */
+label {
+  display: block;
 }
 
+input,
+select {
+  padding: 0.4rem;
+  margin: 0.3rem 0;
+}
+
+small {
+  color: red;
+}
+
+
+
+/* Thème sombre automatique */
 @media (prefers-color-scheme: dark) {
-  body { background: #2c2c2c; color: #ffffff; }
-  .ancien, .ancien a { color: #4caf50; }
+  body {
+    background: #222;
+    color: #eee;
+  }
+  li {
+    background: #333;
+    border-color: #555;
+  }
+  nav a {
+    color: #eee;
+  }
+  a,
+  .actif {
+    color: #a5b4fc;
+  }
 }
