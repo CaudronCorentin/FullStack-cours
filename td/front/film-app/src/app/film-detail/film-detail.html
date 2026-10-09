@@ -28,7 +28,7 @@
 
   <select [(ngModel)]="acteurSelectionne">
     @for (a of acteursDisponibles(); track a.id){
-      <option> [ngValue]="a.id"{{a.prenom}} {{a.nom}} </option>
+      <option [ngValue]="a.id">{{a.prenom}} {{a.nom}} </option>
     }
   </select>
   <button (click)="associer()">Associer</button>

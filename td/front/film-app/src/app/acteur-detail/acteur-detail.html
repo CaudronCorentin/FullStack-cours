@@ -11,7 +11,7 @@
   <ul>
     @for(f of films(); track f.id){
       <li>
-        <a [routerLink]="['/film', f.id]">
+        <a [routerLink]="['/films', f.id]">
           {{f.titre}}
         </a>
         <span> {{f.dateSortie | date:"dd/MM/yyyy"}}</span>
