@@ -33,3 +33,12 @@ button {
 li span {
   margin-left: 1rem;
 }
+
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { background: #2c2c2c; color: #ffffff; }
+  .ancien, .ancien a { color: #4caf50; }
+}
