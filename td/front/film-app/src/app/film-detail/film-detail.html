@@ -17,9 +17,19 @@
   <h2>Acteurs</h2>
   <ul>
     @for (a of f.acteurs; track a.id) {
-      <li><a [routerLink]="['/acteurs', a.id]">{{ a.prenom }} {{ a.nom }}</a></li>
+      <li>
+        <a [routerLink]="['/acteurs', a.id]">{{ a.prenom }} {{ a.nom }}</a>
+        <button (click)="dissocier(a.id)">Dissocier</button>
+      </li>
     } @empty {
       <li>Aucun acteur associé</li>
     }
   </ul>
+
+  <select [(ngModel)]="acteurSelectionne">
+    @for (a of acteursDisponibles(); track a.id){
+      <option> [ngValue]="a.id"{{a.prenom}} {{a.nom}} </option>
+    }
+  </select>
+  <button (click)="associer()">Associer</button>
 }
