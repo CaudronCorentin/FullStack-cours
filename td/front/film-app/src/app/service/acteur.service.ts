@@ -25,4 +25,8 @@ export class ActeurService {
   getFilms(id: number): Observable<Film[]> {
     return this.http.get<Film[]>(`${this.url}/${id}/films`);
   }
+
+  creer(a: Partial<Acteur>): Observable<Acteur> {
+    return this.http.post<Acteur>(this.url, a);
+  }
 }

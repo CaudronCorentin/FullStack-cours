@@ -1,0 +1,23 @@
+<a routerLink="/acteurs">Retour à la liste des acteurs</a>
+
+<h1>Nouvel acteur</h1>
+
+@if (erreur()) {
+  <p>{{ erreur() }}</p>
+}
+
+<form #form="ngForm" (ngSubmit)="enregistrer()">
+  <p>
+    <label>Nom <input name="nom" [(ngModel)]="nom" required #n="ngModel" /></label>
+    @if (n.invalid && n.touched) {
+      <small>Nom requis</small>
+    }
+  </p>
+  <p>
+    <label>Prénom <input name="prenom" [(ngModel)]="prenom" required #p="ngModel" /></label>
+    @if (p.invalid && p.touched) {
+      <small>Prénom requis</small>
+    }
+  </p>
+  <button type="submit" [disabled]="form.invalid">Enregistrer</button>
+</form>

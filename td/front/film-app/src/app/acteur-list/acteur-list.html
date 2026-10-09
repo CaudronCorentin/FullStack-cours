@@ -1,5 +1,7 @@
 <h1>Acteurs</h1>
 
+<a routerLink="/acteurs/nouveau">Nouvel acteur</a>
+
 @if (acteurs$ | async; as acteurs){
   <ul>
     @for (a of acteurs; track a.id){
